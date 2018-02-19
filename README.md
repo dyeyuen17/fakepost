@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Fakepost
 
 To start your Phoenix server:
@@ -22,4 +22,4 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
 =======
 # fakepost
 training repo
->>>>>>> ae7e6aabfe53165f7ebd68dc468a415fdbb1c97b
+
