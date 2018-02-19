@@ -23,8 +23,10 @@ defmodule FakepostWeb.PostController do
   end
 
   def show(conn, %{"user_id" => user_id, "id" => id}, current_user) do
-    user = User |>
-    post = User |>
+    user = User |> Repo.get!(user_id)
+    post = User |> user_post_by_id(id) |> Repo.preload(:user)
+
+    render(conn, "show.html", post: post, user: user)
   end
 
   defp user_posts(user) do
