@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Fakepost
 
 To start your Phoenix server:
@@ -18,3 +19,7 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Docs: https://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
+=======
+# fakepost
+training repo
+>>>>>>> ae7e6aabfe53165f7ebd68dc468a415fdbb1c97b
