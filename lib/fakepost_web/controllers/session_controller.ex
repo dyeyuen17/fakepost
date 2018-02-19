@@ -29,13 +29,15 @@ defmodule FakepostWeb.SessionController do
     # |> redirect(to: "/new")
   end
 
-  # def delete(conn, _) do
-  #
-  # end
+  def delete(conn, _) do
+    conn
+    |> logout
+  end
 
-  def logout(conn, _params) do
+  defp logout(conn) do
     conn
     |> Guardian.Plug.sign_out()
+    |> put_flash(:info, "Session Ended.")
     |> redirect(to: page_path(conn, :index))
   end
 

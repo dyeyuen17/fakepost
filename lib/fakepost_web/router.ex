@@ -15,6 +15,7 @@ defmodule FakepostWeb.Router do
 
   pipeline :auth do
     plug Fakepost.Accounts.Pipeline
+    plug Fakepost.Accounts.CurrentUser
   end
 
   pipeline :ensure_auth do

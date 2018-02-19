@@ -1,4 +1,5 @@
 <div class="jumbotron">
+         <span class="logo justify-content-between"></span>
   <h2><%= gettext "Welcome to %{name}!", name: "FAKEPOST" %></h2>
   <p class="lead"> Lorem ipsum dolor sit amet, consectetur adipisicing elit,
     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
