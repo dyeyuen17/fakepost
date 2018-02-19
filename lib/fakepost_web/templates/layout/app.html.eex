@@ -7,14 +7,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Fakepost!</title>
+    <title>Fakepost</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <ol class="breadcrumb text-right">
+    <div class="container bg-white">
+      <header class="header" >
+        <ol class="breadcrumb text-right" style="background-color: #fff !important;">
+          <li> <a href="http://localhost:4000" style=""> Home </a> </li>
           <%= if @current_user do %>
               <li><%= @current_user.email %></li>
               <li>

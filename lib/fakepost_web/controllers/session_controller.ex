@@ -18,7 +18,7 @@ defmodule FakepostWeb.SessionController do
   defp login_reply({:error, error}, conn) do
     conn
     |> put_flash(:info, error)
-    |> redirect(to: "/new")
+    |> redirect(to: "/")
   end
 
   defp login_reply({:ok, user}, conn) do
