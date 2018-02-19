@@ -19,6 +19,7 @@ defmodule FakepostWeb.Router do
 
   pipeline :ensure_auth do
     plug Guardian.Plug.EnsureAuthenticated
+    plug Fakepost.Accounts.CurrentUser
   end
 
   scope "/", FakepostWeb do
@@ -35,11 +36,6 @@ defmodule FakepostWeb.Router do
     get "/home", SessionController, :home
   end
 
-  pipeline :with_session do
-    plug Guardian.Plug.VerifySession
-    plug Guardian.Plug.LoadResource
-    plug Fakepost.Accounts.CurrentUser
-  end
 
   # Other scopes may use custom stacks.
   # scope "/api", FakepostWeb do
