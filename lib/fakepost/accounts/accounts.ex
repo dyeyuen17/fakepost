@@ -35,7 +35,11 @@ defmodule Fakepost.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(id) do
+    User
+      |> Repo.get!(id)
+      |> Repo.preload(:posts)
+  end
 
   @doc """
   Creates a user.
@@ -160,7 +164,7 @@ defmodule Fakepost.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id), do: Post |> Repo.get!(id) |> Repo.preload(:user)
 
   @doc """
   Creates a post.
@@ -174,8 +178,8 @@ defmodule Fakepost.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_post(attrs \\ %{}) do
-    %Post{}
+  def create_post(attrs \\ %{}, user) do
+    %Post{user_id: user.id}
     |> Post.changeset(attrs)
     |> Repo.insert()
   end

@@ -3,6 +3,9 @@ defmodule FakepostWeb.PostController do
   alias Fakepost.Accounts.Post
   alias Fakepost.Accounts.User
   alias Fakepost.Repo
+  alias Fakepost.Accounts
+  import Ecto.Query, warn: false
+  import Ecto.Changeset, warn: false
 
   plug :scrub_params, "post" when action in [:create, :update]
 
@@ -10,7 +13,7 @@ defmodule FakepostWeb.PostController do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user])
   end
 
-  def index(conn, _params, current_user) do
+  def index(conn, %{"user_id" => user_id}, _current_user) do
     user = User |> Repo.get!(user_id)
 
     posts =
@@ -23,19 +26,25 @@ defmodule FakepostWeb.PostController do
   end
 
   def show(conn, %{"user_id" => user_id, "id" => id}, current_user) do
-    user = User |> Repo.get!(user_id)
-    post = User |> user_post_by_id(id) |> Repo.preload(:user)
+    user =
+      User
+      |> Repo.get!(user_id)
+    post =
+      User
+      |> user_post_by_id(id)
+      |> Repo.preload(:user)
 
     render(conn, "show.html", post: post, user: user)
   end
 
   defp user_posts(user) do
-    assoc(user, :posts)
+    Ecto.assoc(user, :posts)
   end
 
   defp user_post_by_id(user, post_id) do
     user
     |> user_posts
-    |> Post.get_post(post_id)
+    |> Accounts.get_post!()
   end
+
 end
