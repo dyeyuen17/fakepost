@@ -24,7 +24,7 @@ defmodule FakepostWeb.Router do
   end
 
   scope "/", FakepostWeb do
-    pipe_through [:browser, :auth]# Use the default browser stack
+    pipe_through [:browser, :auth]
 
     get "/", PageController, :index
     resources "/users", UserController, only: [:show, :new, :create]
@@ -36,6 +36,7 @@ defmodule FakepostWeb.Router do
 
       resources "/users", UserController, only: [:show] do
         resources "/posts", PostController
+        post "/new", PostController, :new
       end
     end
 
@@ -46,13 +47,20 @@ defmodule FakepostWeb.Router do
     get "/home", SessionController, :home
   end
 
-  pipeline :login_required do
-  end
-
 
 
   # Other scopes may use custom stacks.
   # scope "/api", FakepostWeb do
   #   pipe_through :api
   # end
+
+
+
+
+  pipeline :login_required do
+    plug Guardian.Plug.EnsureAuthenticated,
+       handler: Fakepost.Accounts.LoginGuard
+  end
+
+
 end

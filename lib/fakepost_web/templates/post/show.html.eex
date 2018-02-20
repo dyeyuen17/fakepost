@@ -1,12 +1,13 @@
-<%= link "To list", to: user_post_path(@conn, :index, @post.user) %>
-  <h1>
+<%= link "back", to: user_post_path(@conn, :index, @current_user) %>
+  <h3>
     <%= @post.title %>
-  </h1>
+  </h3>
   <p>
     <%= @post.body %>
   </p>
 
   <%= if @current_user.id == @user.id do %>
+  <div class="pull-right">
     <span>
       <%= link "Edit", to: user_post_path(@conn, :edit, @current_user, @post),
       class: "btn btn-primary btn-xs" %>
@@ -14,4 +15,6 @@
       <%= link "Delete", to: user_post_path(@conn, :delete, @current_user, @post),
       method: :delete, data: [confirm: "Really?"], class: "btn btn-danger btn-xs"%>
     </span>
+  </div>
+
   <% end %>

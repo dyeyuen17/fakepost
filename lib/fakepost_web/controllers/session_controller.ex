@@ -1,6 +1,5 @@
 defmodule FakepostWeb.SessionController do
   use FakepostWeb, :controller
-  # alias Fakepost.Accounts.User
   alias Fakepost.Accounts
   alias Fakepost.Accounts.Guardian
 
@@ -17,8 +16,8 @@ defmodule FakepostWeb.SessionController do
 
   defp login_reply({:error, error}, conn) do
     conn
-    |> put_flash(:info, error)
-    |> redirect(to: "/")
+    |> put_flash(:error, error)
+    |> redirect(to: session_path(conn, :new))
   end
 
   defp login_reply({:ok, user}, conn) do
@@ -26,7 +25,6 @@ defmodule FakepostWeb.SessionController do
     |> put_flash(:success, "Welcome back!")
     |> Guardian.Plug.sign_in(user)
     |> redirect(to: page_path(conn, :index))
-    # |> redirect(to: "/new")
   end
 
   def delete(conn, _) do

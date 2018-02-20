@@ -7,7 +7,7 @@ defmodule FakepostWeb.PostController do
   import Ecto.Query, warn: false
   import Ecto.Changeset, warn: false
 
-  plug :scrub_params, "post" when action in [:create, :update]
+  plug :scrub_params, "post" when action in [:create]
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user])
@@ -18,33 +18,40 @@ defmodule FakepostWeb.PostController do
 
     posts =
       user
-      |> user_posts
-      |> Repo.all
-      |> Repo.preload(:user)
+        |> Ecto.assoc(:posts)
+        |> Repo.all
+        |> Repo.preload(:user)
 
     render(conn, "index.html", posts: posts, user: user)
   end
 
-  def show(conn, %{"user_id" => user_id, "id" => id}, current_user) do
-    user =
-      User
-      |> Repo.get!(user_id)
-    post =
-      User
-      |> user_post_by_id(id)
-      |> Repo.preload(:user)
+  def show(conn, %{"user_id" => user_id}, _current_user) do
+    user = Accounts.get_user!(user_id)
+    post = Accounts.get_post!(user_id)
 
     render(conn, "show.html", post: post, user: user)
   end
 
-  defp user_posts(user) do
-    Ecto.assoc(user, :posts)
+  def new(conn, _params, _current_user) do
+    changeset = Post.changeset(%Post{}, %{})
+    render(conn, "new.html", changeset: changeset)
   end
 
-  defp user_post_by_id(user, post_id) do
-    user
-    |> user_posts
-    |> Accounts.get_post!()
+  def create(conn, %{"post" => post_params}, current_user) do
+    Accounts.create_post(post_params, current_user)
+      |> post_response(conn)
   end
+
+  defp post_response({:error, error}, conn) do
+    conn
+    |> put_flash(:error, error)
+    |> redirect(to: page_path(conn, :index))
+  end
+
+  defp post_response({:ok, _user}, conn) do
+    conn
+    |> redirect(to: page_path(conn, :index))
+  end
+
 
 end

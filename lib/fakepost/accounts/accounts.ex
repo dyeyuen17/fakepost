@@ -150,6 +150,7 @@ defmodule Fakepost.Accounts do
     Repo.all(Post)
   end
 
+
   @doc """
   Gets a single post.
 
@@ -164,7 +165,22 @@ defmodule Fakepost.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Post |> Repo.get!(id) |> Repo.preload(:user)
+  def get_post!(id) do
+    Post
+      |> Repo.get!(id)
+      |> Repo.preload(:user)
+  end
+
+
+  def get_posts do
+    Post
+    |> order_by(desc: :updated_at)
+    |> Repo.all()
+    |> Repo.preload(:user)
+
+    # query = from(p in Post, order_by: [desc: p.updated_at])
+    # Repo.preload(Post,query)
+  end
 
   @doc """
   Creates a post.
