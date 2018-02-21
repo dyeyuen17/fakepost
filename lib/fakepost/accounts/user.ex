@@ -3,6 +3,7 @@ defmodule Fakepost.Accounts.User do
   import Ecto.Changeset
   alias Fakepost.Accounts.User
   alias Fakepost.Accounts.Post
+  alias Fakepost.Accounts.Comment
 
 
   schema "users" do
@@ -10,6 +11,7 @@ defmodule Fakepost.Accounts.User do
     field :name, :string
     field :password, :string
     has_many :posts, Post
+    has_many :comments, Comment
 
     timestamps()
   end

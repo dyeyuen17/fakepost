@@ -30,6 +30,7 @@ defmodule FakepostWeb.Router do
     resources "/users", UserController, only: [:show, :new, :create]
     resources "/sessions", SessionController, only: [:new, :delete]
     post "/sessions", SessionController, :authenticate_user
+    resources "/comments", CommentController
 
     scope "/" do
       pipe_through [:login_required]

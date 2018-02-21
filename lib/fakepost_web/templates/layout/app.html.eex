@@ -9,10 +9,13 @@
 
     <title>Fakepost</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/dyey-custom.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/dyeyjj.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/dyeyjj-theme.css") %>">
   </head>
 
-  <body>
-    <div class="container bg-white">
+  <body class="dc-bg-black">
+    <div class="dyey-container dyey-content bg-white">
       <header class="header" >
         <ol class="breadcrumb text-right" style="background-color: #fff !important;">
           <li> <a href="http://localhost:4000" style=""> Home </a> </li>
@@ -42,4 +45,32 @@
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
+
+  <script>
+
+  	function myFunction(id) {
+  	    var x = document.getElementById(id);
+  	    if (x.className.indexOf("dyey-show") == -1) {
+  	        x.className += " dyey-show";
+  	        x.previousElementSibling.className += " dyey-theme-d1";
+  	    } else {
+  	        x.className = x.className.replace("dyey-show", "");
+  	        x.previousElementSibling.className =
+  	        x.previousElementSibling.className.replace(" dyey-theme-d1", "");
+  	    }
+  	}
+
+  	function myFunction1(id) {
+  	    var x = document.getElementById(id);
+  	    if (x.className.indexOf("dyey-show") == -1) {
+  	        x.className += " dyey-show";
+  	    } else {
+  	        x.className = x.className.replace("dyey-show", "");
+  	    }
+
+  	}
+
+	</script>
+
+
 </html>

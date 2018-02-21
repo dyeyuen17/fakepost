@@ -25,9 +25,9 @@ defmodule FakepostWeb.PostController do
     render(conn, "index.html", posts: posts, user: user)
   end
 
-  def show(conn, %{"user_id" => user_id}, _current_user) do
-    user = Accounts.get_user!(user_id)
-    post = Accounts.get_post!(user_id)
+  def show(conn, %{"id" => id}, current_user) do
+    user = Accounts.get_user!(current_user.id)
+    post = Accounts.get_post!(id)
 
     render(conn, "show.html", post: post, user: user)
   end
