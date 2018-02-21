@@ -9,12 +9,10 @@
 
     <title>Fakepost</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/dyey-custom.css") %>">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/dyeyjj.css") %>">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/dyeyjj-theme.css") %>">
+
   </head>
 
-  <body class="dc-bg-black">
+  <body class="dc-bg-black" onload="loadComments()">
     <div class="dyey-container dyey-content bg-white">
       <header class="header" >
         <ol class="breadcrumb text-right" style="background-color: #fff !important;">
@@ -47,6 +45,12 @@
   </body>
 
   <script>
+
+
+    function loadComments(){
+
+
+    }
 
   	function myFunction(id) {
   	    var x = document.getElementById(id);

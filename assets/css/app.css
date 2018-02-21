@@ -1,1 +1,13 @@
 /* This file is for your main application css. */
+
+
+/*
+		** i deleted this link from app.html.eex
+		reason: i got error like[no route found for GET /css/dyeyjj-theme.css]
+		**
+		<link rel="stylesheet" href="<%= static_path(@conn, "/css/dyey-custom.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/dyeyjj.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/dyeyjj-theme.css") %>">
+
+
+*/

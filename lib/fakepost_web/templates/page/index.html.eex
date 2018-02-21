@@ -26,30 +26,30 @@
 
 
   <ul>
-    <%= for post <- @post do %>
+    <%= for posts <- @post do %>
       <div class="dyey-container dyey-card-2 dyey-theme-l5 dyey-round dyey-margin post-content" style="color: #444 !important;">
         <div class="result-div" style="padding-bottom: 10px !important;">
           <span class="dyey-right dyey-opacity post-time">
-            <%= post.updated_at %>
+            <%= posts.updated_at %>
           </span>
           <h3 class=" post-name">
-            <%= post.title %>
+            <%= posts.title %>
           </h3>
             <div class="dyey-row-padding" style="margin:0 -7px">
               <span class="dyey-right">
-                <%= if @current_user.id == post.user.id do  %>
+                <%= if @current_user.id == posts.user.id do  %>
                   <a rel="stylesheet" href="#"> edit </a>
                     &nbsp;|
                   <a rel="stylesheet" href="#" style="color: #e45757;"> delete </a>
                 <% end %>
               </span>
               <h5 class=" post-name">
-                | <%= post.user.name %>
+                | <%= posts.user.name %>
               </h5>
             </div>
 	          <hr class="dyey-clear">
             <p class="post-text" style="padding-bottom: 10px !important; margin-left: 3px !important;">
-              <%= post.body %>
+              <%= posts.body %>
             </p>
         </div>
         <div>
@@ -58,15 +58,15 @@
               <img alt="" class="j-send-icon" style="height:24px;width:24px; padding: 0px; margin: 0px;">
             </button>
         </div>
-        <!-- <button onclick="myFunction1('Demo<%= post.id %>')" class="dyey-btn dyey-small dyey-theme-l5 dyey-round " style="margin: 2px; padding: 4px;" > -->
-          <a onclick="myFunction1('Demo<%= post.id %>')" class="dyey-small" style="cursor: pointer; margin: 0px;"> <p style=" margin: 5px 0px 0px 5px; padding: 0px;">Comments</p> </a>
+        <!-- <button onclick="myFunction1('Demo<%= posts.id %>')" class="dyey-btn dyey-small dyey-theme-l5 dyey-round " style="margin: 2px; padding: 4px;" > -->
+          <a onclick="myFunction1('Demo<%= posts.id %>')" class="dyey-small" style="cursor: pointer; margin: 0px;"> <p style=" margin: 5px 0px 0px 5px; padding: 0px;">Comments</p> </a>
         <!-- </button> -->
 
         <ul style="padding-left: 10px; margin-top: 5px !important;">
           <div class="dyey-card-2 dyey-round adiv" style="width: 100%; margin-top: 5px;">
             <div class="dyey-accordion dyey-white">
 
-              <div id="Demo<%= post.id %>" class="dyey-accordion-content dyey-container" style=" width: 95%; margin-left: 1%;">
+              <div id="Demo<%= posts.id %>" class="dyey-accordion-content dyey-container comment-div-<%= posts.id %>" style=" width: 95%; margin-left: 1%;">
 
                 <br>
                 <div class="comment-result-div">
