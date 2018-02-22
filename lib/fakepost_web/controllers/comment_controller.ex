@@ -2,12 +2,11 @@ defmodule FakepostWeb.CommentController do
 	use FakepostWeb, :controller
 	# alias Fakepost.Accounts
 	# alias Fakepost.Accounts.Comment
-	# alias Fakepost.Accounts.Post
-	# alias Fakepost.Accounts.User
 
 
-  # plug :scrub_params, "post" when action in [:create, :update]
-  #
+  # plug :scrub_params, "comment" when action in [:create, :update]
+
+
   # def action(conn, _) do
   #   apply(__MODULE__, action_name(conn),
   #         [conn, conn.params, conn.assigns.current_user])
@@ -25,8 +24,8 @@ defmodule FakepostWeb.CommentController do
   #
   # end
   #
-  # def create(conn, %{"post" => post_params}, current_user) do
-  #
+  # def create(conn, %{"post" => post_params}, current_user, post_id) do
+  # 	Accounts.create_comment(post_params, post_id, current_user.id)
   # end
   #
   # def edit(conn, %{"id" => id}, current_user) do

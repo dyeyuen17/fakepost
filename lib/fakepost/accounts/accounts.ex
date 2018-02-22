@@ -277,7 +277,7 @@ defmodule Fakepost.Accounts do
     # Repo.preload(Post,query)
   end
 
-  def get_comment_for_post(post_id) do
+  def get_comment_for_post(_post_id) do
     Comment
       |> order_by(desc: :inserted_at)
       |> Repo.all
@@ -313,8 +313,8 @@ defmodule Fakepost.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_comment(attrs \\ %{}, post, user) do
-    %Comment{user_id: user.id, post_id: post.id}
+  def create_comment(attrs \\ %{}, user_id, post_id) do
+    %Comment{user_id: user_id, post_id: post_id}
     |> Comment.changeset(attrs)
     |> Repo.insert()
   end

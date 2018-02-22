@@ -24,7 +24,6 @@
 
 
 
-
   <ul>
     <%= for posts <- @post do %>
       <div class="dyey-container dyey-card-2 dyey-theme-l5 dyey-round dyey-margin post-content" style="color: #444 !important;">
@@ -40,7 +39,7 @@
                 <%= if @current_user.id == posts.user.id do  %>
                   <a rel="stylesheet" href="#"> edit </a>
                     &nbsp;|
-                  <a rel="stylesheet" href="#" style="color: #e45757;"> delete </a>
+                  <%= link "delete", to: page_path(@conn, :delete_comment, posts), method: :delete, data: [confirm: "Really?"], style: "color: #e45757;" %>
                 <% end %>
               </span>
               <h5 class=" post-name">
@@ -48,44 +47,61 @@
               </h5>
             </div>
 	          <hr class="dyey-clear">
-            <p class="post-text" style="padding-bottom: 10px !important; margin-left: 3px !important;">
+            <p class="post-text" style="padding-bottom: 0px !important; margin-left: 3px !important;">
               <%= posts.body %>
             </p>
         </div>
-        <div>
-          <input type="text" class="post-comment" placeholder="Write a comment" name=""  style="height: 30px; width: 88%	; margin: 0px font-family: &nbsp; Segoe UI,Arial,sans-serif;  font-size:15px; color : #000 !important;">
-            <button class="dyey-btn actions-btn dyey-circle dyey-theme-l4" style="height: 30px; width: 30px; padding: 5px;">
-              <img alt="" class="j-send-icon" style="height:24px;width:24px; padding: 0px; margin: 0px;">
-            </button>
-        </div>
+
+
+        <%= form_for @changeset, page_path(@conn, :new_comment, posts.id), [as: :comments], fn f -> %>
+
+          <div class="col-xs-11 dyey-padding" style="padding: 0px 0px 8px 0px !important;">
+            <%= text_input f, :content, placeholder: "Write a comment", class: "form-control post-comment", style: "height: 30px; width: 100%	; margin: 0px font-family: &nbsp; Segoe UI,Arial,sans-serif;  font-size:15px; color : #000 !important;" %>
+            <%= error_tag f, :content %>
+          </div >
+          <div class="col-xs-1" style="padding: 0px 5px 0px 10px;">
+            <%= submit "", class: "dyey-btn actions-btn dyey-circle dyey-theme-l5 j-send-icon", style: "height:30px; width:30px; padding: 0px ; margin: 0px;" %>
+          </div>
+
+        <% end %>
+
+
         <!-- <button onclick="myFunction1('Demo<%= posts.id %>')" class="dyey-btn dyey-small dyey-theme-l5 dyey-round " style="margin: 2px; padding: 4px;" > -->
           <a onclick="myFunction1('Demo<%= posts.id %>')" class="dyey-small" style="cursor: pointer; margin: 0px;"> <p style=" margin: 5px 0px 0px 5px; padding: 0px;">Comments</p> </a>
         <!-- </button> -->
 
-        <ul style="padding-left: 10px; margin-top: 5px !important;">
-          <div class="dyey-card-2 dyey-round adiv" style="width: 100%; margin-top: 5px;">
-            <div class="dyey-accordion dyey-white">
+
+          <div class=" dyey-round adiv" style="width: 100%; margin-top: 5px;">
+            <div class="dyey-accordion" >
 
               <div id="Demo<%= posts.id %>" class="dyey-accordion-content dyey-container comment-div-<%= posts.id %>" style=" width: 95%; margin-left: 1%;">
 
-                <br>
-                <div class="comment-result-div">
-                  <span class="dyey-right dyey-opacity comment-time">
-                    time commented
-                  </span>
-                  <h5 class=" comment-name dyey-theme-l5">
-                    <strong> Person who commented </strong>
-                  </h5>
-                  <p class="comment-text">
-                    This is the content of a comment from the person who commented.
-                  </p>
-                  <hr>
-                </div>
+                  <%= for comments <- @comment do %>
+                    <%= if posts.id == comments.post_id do  %>
+                        <div class="comment-result-div" style="margin-top: 10px;">
+                          <span class="dyey-right dyey-opacity comment-time">
+                            <%= comments.inserted_at %>
+                          </span>
+                          <h5 class=" comment-name ">
+                            <strong> <%= comments.user.name %> </strong>
+                          </h5>
+                          <p class="comment-text">
+                            <%= comments.content %>
+                          </p>
+                          <hr>
+                        </div>
+                  <% else %>
+
+                  <% end %>
+
+                <% end %>
+
+
               </div>
 
             </div>
           </div>
-        </ul>
+
 
         <br>
       </div>
@@ -95,7 +111,7 @@
 
 <% else %>
 
-  <div class="jumbotron" style="background-color: transparent !important;">
+  <div class="jumbotron dyey-container container" style="background-color: transparent !important;">
            <span class="logo justify-content-between"></span>
     <h2><%= gettext "Welcome to %{name}!", name: "FAKEPOST" %></h2>
     <p class="lead"> Lorem ipsum dolor sit amet, consectetur adipisicing elit,

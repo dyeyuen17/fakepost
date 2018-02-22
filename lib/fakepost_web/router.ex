@@ -27,10 +27,11 @@ defmodule FakepostWeb.Router do
     pipe_through [:browser, :auth]
 
     get "/", PageController, :index
+    post "/:post_id/comment", PageController, :new_comment
+    delete "/:post_id", PageController, :delete_comment
     resources "/users", UserController, only: [:show, :new, :create]
     resources "/sessions", SessionController, only: [:new, :delete]
     post "/sessions", SessionController, :authenticate_user
-    resources "/comments", CommentController
 
     scope "/" do
       pipe_through [:login_required]
