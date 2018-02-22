@@ -216,6 +216,8 @@ defmodule Fakepost.Accounts do
 
   """
   def update_post(%Post{} = post, attrs) do
+    # require IEx
+    # IEx.pry()
     post
     |> Post.changeset(attrs)
     |> Repo.update()

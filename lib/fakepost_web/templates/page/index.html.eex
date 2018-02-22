@@ -37,7 +37,7 @@
             <div class="dyey-row-padding" style="margin:0 -7px">
               <span class="dyey-right">
                 <%= if @current_user.id == posts.user.id do  %>
-                  <a rel="stylesheet" href="#"> edit </a>
+                  <%= link "Edit", to: user_post_path(@conn, :edit, @current_user, posts) %>
                     &nbsp;|
                   <%= link "delete", to: user_post_path(@conn, :delete, @current_user, posts), method: :delete, style: "color: #e45757;" %>
                 <% end %>

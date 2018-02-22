@@ -1,26 +1,28 @@
+<div class="dyey-container container" style="max-width: 500px;">
 
+  <%= if @current_user.id == @user.id do %>
 
-<%= if @current_user.id == @user.id do %>
-
-<div class="dyey-container container">
-  <h3 class="pull-left">My Posts</h3>
-    <%= link "new post", to: user_post_path(@conn, :new, @current_user),
-    class: "btn btn-primary lg pull-right" %>
-</div>
-
-<% else %>
-  <div class="container">
-    <h1><%= @user.name %>'s Posts</h1>
+  <div class="dyey-container container">
+    <h3 class="pull-left">My Posts</h3>
+      <%= link "new post", to: user_post_path(@conn, :new, @current_user),
+      class: "btn btn-primary lg pull-right" %>
   </div>
-<% end %>
 
-<div class="dyey-container container">
-  <ul>
-    <%= for post <- @posts do %>
-      <li>
-        <%= link post.title, to: user_post_path(@conn, :show, post.user, post) %>
-      </li>
-    <% end %>
-  </ul>
+  <% else %>
+    <div class="container">
+      <h1><%= @user.name %>'s Posts</h1>
+    </div>
+  <% end %>
 
+  <div class="dyey-container container">
+    <ul>
+      <%= for post <- @posts do %>
+        <li>
+          <%= link post.title, to: user_post_path(@conn, :show, post.user, post) %>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+  
 </div>

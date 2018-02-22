@@ -32,14 +32,4 @@ defmodule FakepostWeb.PageController do
   end
 
 
-  # def delete_comment(conn, params) do
-  #   # post_id_int = posts |> String.to_integer
-  #   require IEx
-  #   IEx.pry()
-  #   Accounts.delete_post(params)
-  #   conn
-  #     |> redirect(to: page_path(conn, :index))
-  # end
-
-
 end

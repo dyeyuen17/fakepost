@@ -9,8 +9,7 @@
   <%= if @current_user.id == @user.id do %>
   <div class="pull-right">
     <span>
-      <%= link "Edit", to: user_post_path(@conn, :edit, @current_user, @post),
-      class: "btn btn-primary btn-xs" %>
+      <%= link "Edit", to: user_post_path(@conn, :edit, @current_user, @post), class: "btn btn-primary btn-xs" %>
       &nbsp;
       <%= link "Delete", to: user_post_path(@conn, :delete, @current_user, @post), method: :delete, class: "btn btn-danger btn-xs"%>
     </span>

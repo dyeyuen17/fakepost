@@ -43,15 +43,38 @@ defmodule FakepostWeb.PostController do
   end
 
   def delete(conn, %{"user_id" => _user_id, "id" => id}, _current_user) do
-    # user = Accounts.get_user!(user_id)
     post = Accounts.get_post!(id)
-
     Accounts.delete_post(post)
 
       conn
       |> put_flash(:info, "Post was deleted successfully")
       |> redirect(to: page_path(conn, :index))
 
+  end
+
+  def edit(conn, %{"user_id" => _user_id, "id" => id}, _current_user) do
+    post = Accounts.get_post!(id)
+
+    changeset = Post.changeset(post, %{})
+    render(conn, "edit.html", post: post, changeset: changeset)
+  end
+
+  def update(conn,%{"id" => id, "post" => post_params}, _current_user) do
+    post = Accounts.get_post!(id)
+
+    Accounts.update_post(post, post_params)
+      |> update_response(conn)
+  end
+
+  defp update_response({:ok, _}, conn) do
+    conn
+      |> redirect(to: page_path(conn, :index))
+  end
+
+  defp update_response({:error, error}, conn) do
+    conn
+      |> put_flash(:error, error)
+      |> redirect(to: page_path(conn, :index))
   end
 
   defp post_response({:error, error}, conn) do
@@ -67,7 +90,7 @@ defmodule FakepostWeb.PostController do
 
 
 
-
+# render(conn, "edit.html", post: post, changeset: changeset)
 
 
 end
