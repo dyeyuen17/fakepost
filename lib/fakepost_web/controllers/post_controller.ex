@@ -42,6 +42,18 @@ defmodule FakepostWeb.PostController do
       |> post_response(conn)
   end
 
+  def delete(conn, %{"user_id" => _user_id, "id" => id}, _current_user) do
+    # user = Accounts.get_user!(user_id)
+    post = Accounts.get_post!(id)
+
+    Accounts.delete_post(post)
+
+      conn
+      |> put_flash(:info, "Post was deleted successfully")
+      |> redirect(to: page_path(conn, :index))
+
+  end
+
   defp post_response({:error, error}, conn) do
     conn
     |> put_flash(:error, error)
@@ -52,6 +64,10 @@ defmodule FakepostWeb.PostController do
     conn
     |> redirect(to: page_path(conn, :index))
   end
+
+
+
+
 
 
 end

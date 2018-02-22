@@ -2,6 +2,7 @@ defmodule FakepostWeb.PageController do
   use FakepostWeb, :controller
   alias Fakepost.Accounts
   alias Fakepost.Accounts.Comment
+  alias Fakepost.Accounts.Post
 
 
   def index(conn, _params) do
@@ -31,13 +32,14 @@ defmodule FakepostWeb.PageController do
   end
 
 
-  def delete_comment(conn, %{"posts" => posts}) do
-    require IEx
-    IEx.pry()
-    Accounts.delete_post(posts)
-    conn
-      |> redirect(to: page_path(conn, :index))
-  end
+  # def delete_comment(conn, params) do
+  #   # post_id_int = posts |> String.to_integer
+  #   require IEx
+  #   IEx.pry()
+  #   Accounts.delete_post(params)
+  #   conn
+  #     |> redirect(to: page_path(conn, :index))
+  # end
 
 
 end

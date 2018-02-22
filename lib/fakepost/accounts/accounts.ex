@@ -234,7 +234,13 @@ defmodule Fakepost.Accounts do
 
   """
   def delete_post(%Post{} = post) do
+
     Repo.delete(post)
+  end
+
+  def delete_post!(%Post{} = post, id) do
+    post
+      |> Repo.delete!(id)
   end
 
   @doc """

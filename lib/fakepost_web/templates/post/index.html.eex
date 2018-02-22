@@ -1,6 +1,8 @@
+
+
 <%= if @current_user.id == @user.id do %>
 
-<div class="container">
+<div class="dyey-container container">
   <h3 class="pull-left">My Posts</h3>
     <%= link "new post", to: user_post_path(@conn, :new, @current_user),
     class: "btn btn-primary lg pull-right" %>
@@ -12,7 +14,7 @@
   </div>
 <% end %>
 
-<div class="">
+<div class="dyey-container container">
   <ul>
     <%= for post <- @posts do %>
       <li>

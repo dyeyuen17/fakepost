@@ -39,7 +39,7 @@
                 <%= if @current_user.id == posts.user.id do  %>
                   <a rel="stylesheet" href="#"> edit </a>
                     &nbsp;|
-                  <%= link "delete", to: page_path(@conn, :delete_comment, posts), method: :delete, data: [confirm: "Really?"], style: "color: #e45757;" %>
+                  <%= link "delete", to: user_post_path(@conn, :delete, @current_user, posts), method: :delete, style: "color: #e45757;" %>
                 <% end %>
               </span>
               <h5 class=" post-name">
@@ -52,6 +52,8 @@
             </p>
         </div>
 
+
+<!--method: :delete, data: [confirm: "Really?"],  -->
 
         <%= form_for @changeset, page_path(@conn, :new_comment, posts.id), [as: :comments], fn f -> %>
 
