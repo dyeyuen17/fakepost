@@ -55,6 +55,7 @@ defmodule Fakepost.Accounts do
 
   """
   def create_user(attrs \\ %{}) do
+    IO.inspect("created")
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
@@ -326,6 +327,10 @@ defmodule Fakepost.Accounts do
     |> Comment.changeset(attrs)
     |> Repo.insert()
   end
+
+  # defp validate_comment(nil,_) do
+  #
+  # end
 
   @doc """
   Updates a comment.

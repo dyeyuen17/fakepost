@@ -7,7 +7,7 @@ defmodule FakepostWeb.PostController do
   import Ecto.Query, warn: false
   import Ecto.Changeset, warn: false
 
-  # plug :scrub_params, "post" when action in [:create]
+  plug :scrub_params, "post" when action in [:create, :update]
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user])
@@ -40,6 +40,7 @@ defmodule FakepostWeb.PostController do
   def create(conn, %{"post" => post_params}, current_user) do
     Accounts.create_post(post_params, current_user)
       |> post_response(conn)
+
   end
 
   def delete(conn, %{"user_id" => _user_id, "id" => id}, _current_user) do
@@ -54,32 +55,34 @@ defmodule FakepostWeb.PostController do
 
   def edit(conn, %{"user_id" => _user_id, "id" => id}, _current_user) do
     post = Accounts.get_post!(id)
-
     changeset = Post.changeset(post, %{})
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
   def update(conn,%{"id" => id, "post" => post_params}, _current_user) do
     post = Accounts.get_post!(id)
-
     Accounts.update_post(post, post_params)
-      |> update_response(conn)
+      |> update_response(conn, post)
   end
 
-  defp update_response({:ok, _}, conn) do
+  defp update_response({:ok, _}, conn, _post) do
     conn
       |> redirect(to: page_path(conn, :index))
   end
 
-  defp update_response({:error, error}, conn) do
+  defp update_response({:error, _error}, conn, post) do
+    user_id = conn.assigns.current_user.id
     conn
-      |> put_flash(:error, error)
-      |> redirect(to: page_path(conn, :index))
+      |> put_flash(:error, "You cannot post empty status.")
+      |> redirect(to: user_post_path(conn, :edit , user_id, post.id ))
+
   end
 
-  defp post_response({:error, error}, conn) do
+  defp post_response({:error, _error}, conn) do
+    # require IEx
+    # IEx.pry()
     conn
-    |> put_flash(:error, error)
+    |> put_flash(:post_error, "this can't be blank!")
     |> redirect(to: page_path(conn, :index))
   end
 

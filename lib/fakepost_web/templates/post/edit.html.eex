@@ -13,6 +13,7 @@
     <% end %>
 
     <div class="form-group">
+      <p class="alert alert-danger" style="padding: 5px 0px 5px 15px; background-color: transparent;" role="alert"><%= get_flash(@conn, :post_error) %></p>
       <%= textarea f, :body, placeholder: "Body", class: "form-control", rows: "9" %>
       <%= error_tag f, :body %>
     </div>

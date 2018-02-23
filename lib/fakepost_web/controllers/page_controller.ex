@@ -23,7 +23,7 @@ defmodule FakepostWeb.PageController do
 
   defp comment_response({:error, error}, conn) do
     conn
-    |> put_flash(:error, error)
+    |> put_flash(:comment_error, "this can't be blank")
     |> redirect(to: page_path(conn, :index))
   end
 

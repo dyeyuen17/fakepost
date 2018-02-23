@@ -28,6 +28,7 @@ defmodule FakepostWeb.UserController do
         |> redirect(to: page_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
+
      end
   end
 
