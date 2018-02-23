@@ -13,11 +13,6 @@
     <% end %>
 
     <div class="form-group">
-      <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
-      <%= error_tag f, :title %>
-    </div>
-
-    <div class="form-group">
       <%= textarea f, :body, placeholder: "Body", class: "form-control", rows: "9" %>
       <%= error_tag f, :body %>
     </div>

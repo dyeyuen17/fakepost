@@ -4,22 +4,31 @@
   <div class="dyey-container container">
 
   <ul>
-    <div class="dyey-row-padding">
-      <div class="dyey-col m12">
-        <div class="dyey-card-2 dyey-round dyey-white">
-          <div class="dyey-container dyey-padding">
-            <h5 class="dyey-opacity">
-              Share Your Thoughts!
-            </h5>
-            <input type="text" placeholder="Dude, What's up!?" name=""  style="height: 30px; width:100%; font-family: &nbsp; Segoe UI,Arial,sans-serif;  font-size:20px; color : #000 !important;">
-            <br>
-            <button type="button" class="dyey-btn dyey-theme pull-right" style="margin-top: 10px;">
-              &nbsp;Post
-            </button>
+    <%= form_for @post_changeset, user_post_path(@conn, :create, @current_user), fn f -> %>
+      <div class="dyey-row-padding">
+        <div class="dyey-col m12">
+          <div class="dyey-card-2 dyey-round dyey-white">
+            <div class="dyey-container dyey-padding">
+              <h5 class="dyey-opacity">
+                Share Your Thoughts!
+              </h5>
+              <!-- <input type="text" placeholder="Dude, What's up!?" name=""  style="height: 30px; width:100%; font-family: &nbsp; Segoe UI,Arial,sans-serif;  font-size:20px; color : #000 !important;"> -->
+
+              <div class="form-group">
+                <%= textarea f, :body, placeholder: "Dude, What's up!?", class: "form-control ", rows: "3" %>
+                <%= error_tag f, :body %>
+              </div>
+
+              <%= submit "Post", class: "btn btn-primary pull-right dyey-theme" %>
+              <br>
+              <!-- <button type="button" class="dyey-btn dyey-theme pull-right" style="margin-top: 10px;">
+                &nbsp;Post
+              </button> -->
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </ul>
 
 
@@ -31,20 +40,18 @@
           <span class="dyey-right dyey-opacity post-time">
             <%= posts.updated_at %>
           </span>
-          <h3 class=" post-name">
-            <%= posts.title %>
-          </h3>
+          <h4 class=" post-name">
+            <%= posts.user.name %>
+          </h4>
             <div class="dyey-row-padding" style="margin:0 -7px">
               <span class="dyey-right">
                 <%= if @current_user.id == posts.user.id do  %>
                   <%= link "Edit", to: user_post_path(@conn, :edit, @current_user, posts) %>
                     &nbsp;|
-                  <%= link "delete", to: user_post_path(@conn, :delete, @current_user, posts), method: :delete, style: "color: #e45757;" %>
+                  <%= link "delete", to: user_post_path(@conn, :delete, @current_user, posts), method: :delete, data: [confirm: "Are you sure?"], style: "color: #e45757;" %>
                 <% end %>
               </span>
-              <h5 class=" post-name">
-                | <%= posts.user.name %>
-              </h5>
+    
             </div>
 	          <hr class="dyey-clear">
             <p class="post-text" style="padding-bottom: 0px !important; margin-left: 3px !important;">

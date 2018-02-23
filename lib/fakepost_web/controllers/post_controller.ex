@@ -7,7 +7,7 @@ defmodule FakepostWeb.PostController do
   import Ecto.Query, warn: false
   import Ecto.Changeset, warn: false
 
-  plug :scrub_params, "post" when action in [:create]
+  # plug :scrub_params, "post" when action in [:create]
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user])

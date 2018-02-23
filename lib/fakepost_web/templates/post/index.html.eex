@@ -18,11 +18,11 @@
     <ul>
       <%= for post <- @posts do %>
         <li>
-          <%= link post.title, to: user_post_path(@conn, :show, post.user, post) %>
+          <%= link post.body, to: user_post_path(@conn, :show, post.user, post) %>
         </li>
       <% end %>
     </ul>
 
   </div>
-  
+
 </div>

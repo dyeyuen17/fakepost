@@ -9,8 +9,9 @@ defmodule FakepostWeb.PageController do
     post = Accounts.get_posts
     comment = Accounts.get_comments
     changeset = Comment.changeset(%Comment{}, %{})
+    post_changeset = Post.changeset(%Post{}, %{})
 
-    render(conn, "index.html", post: post, comment: comment, changeset: changeset)
+    render(conn, "index.html", post: post, comment: comment, changeset: changeset, post_changeset: post_changeset)
   end
 
 

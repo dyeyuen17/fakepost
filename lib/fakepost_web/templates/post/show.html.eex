@@ -1,7 +1,6 @@
 <%= link "back", to: user_post_path(@conn, :index, @current_user) %>
-  <h3>
-    <%= @post.title %>
-  </h3>
+
+
   <p>
     <%= @post.body %>
   </p>

@@ -7,7 +7,6 @@ defmodule Fakepost.Accounts.Post do
 
   schema "posts" do
     field :body, :string
-    field :title, :string
     belongs_to :user, User
     has_many :comments, Comment
 
@@ -18,8 +17,8 @@ defmodule Fakepost.Accounts.Post do
   @doc false
   def changeset(%Post{} = post, attrs) do
     post
-    |> cast(attrs, [:title, :body])
-    |> validate_required([:title, :body])
+    |> cast(attrs, [:body])
+    |> validate_required([:body])
     |> assoc_constraint(:user)
   end
 end
