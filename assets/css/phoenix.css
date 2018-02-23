@@ -30,13 +30,23 @@ body, form, ul, table {
   background-size: 519px 71px;
 }
 
+.logo-1 {
+  width: 700px;
+  height: 200px;
+  display: inline-block;
+  margin-bottom: 1em;
+  background-image: url("/images/789.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
 .j-send-icon {
   background-image: url("/images/sendx.png");
   display: inline-block;
   padding: 0px;
   margin: 0px;
   background-size: 24px 30px;
-  background-repeat: no-repeat;
+
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
